@@ -1,0 +1,7 @@
+{%extends "template.html"%}
+
+{% block body %}
+    {% for show,ep in dictionary.items %}
+        <a href="/watch/{{ep}}"><button>{{show}}</button></a>
+    {% endfor %}
+{% endblock %}

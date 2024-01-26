@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+{%block body %}
+    <video id="video" width="400" controls autoplay>{{id}}</video>
+    
+{%load static%}
+<script>
+    var video = document.getElementById('video');
+    var hls = new Hls();
+    var playlistUrl = "{% static 'HLS/playlist.m3u8' %}";
+    var idValue = video.textContent || video.innerText;
+    var dynamicPlaylistUrl = playlistUrl.replace('HLS', idValue);
+    hls.loadSource(dynamicPlaylistUrl);
+    hls.attachMedia(video);
+</script>
+{%endblock%}
