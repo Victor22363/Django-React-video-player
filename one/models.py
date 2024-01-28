@@ -1,5 +1,5 @@
 from django.db import models
-import os, subprocess, time
+import os, subprocess, time, threading
 # Create your models here.
 
 class Show(models.Model):
@@ -26,9 +26,8 @@ class Video(models.Model):
         # Call the original save method to save the instance
         super().save(*args, **kwargs)
         
-        # Call the getHlsNecessities method before saving
-        self.getHlsNecessities()
-        
+        # Call the getHlsNecessities method after saving
+        self.detachThread()
     
     def getHlsNecessities(self):
         if self.file and self.id is not None:
@@ -44,12 +43,19 @@ class Video(models.Model):
             m3u8 = os.path.join(folder_path, 'playlist.m3u8')
 
             # FFmpeg command to create HLS playlist and segments
+
             command = f"ffmpeg -i \"{file_path}\" -c:a aac -b:a 128k -c:v libx264 -crf 18 -flags -global_header -map 0 -f segment -segment_time 10 -segment_list \"{m3u8}\" -segment_format mpegts -c:s:0 copy \"{ts}\""
             subprocess.call(command, shell=True)
 
             print("------HLS IS NOW COMPLETE------")
             os.remove(file_path)
     
+    def detachThread(self):
+        global ffmpeg_thread
+        ffmpeg_thread = threading.Thread(target=self.getHlsNecessities)
+        ffmpeg_thread.start()
+
+
     def __str__(self):
         return f"{self.epNum}"
 
