@@ -3,13 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <title>HLS Video Example</title>
+    {% block head%}
+    {% endblock %}
+    
+    <style>
+        body {
+            background-color: #151314;
+            color: #df3e23;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        button {
+            color:#1d1518;
+            background-color:#df3e23;
+            border: none;
+            font-size: 16px;
+            padding: 5px 10px; 
+            border-radius: 5px;
+            cursor:pointer;
+            transition: background-color 0s ease, box-shadow 0s ease;
+        }
+        button:hover {
+            background-color: #ae3e2d;
+            color: ;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow for depth */
+          }
+        .Bar {
+            width: 100vw;
+            background-color: #111111; /* Set your desired background color */
+            color: #fff; /* Set your desired text color */
+            text-align: left;
+            padding: 15px;
+            margin-top: 0px;
+
+        }
+    </style>
+
     {% load static %}
 </head>
 <body>
-    <a href="{%url 'home'%}">home</a>
-
+    <div class="Bar">
+        <a href="{%url 'home'%}"><button>Home</button></a>
+        <a href="{%url 'watch'%}"><button>Catalog</button></a>
+    </div>
+    
     {% block body%}
     {% endblock  %}
 

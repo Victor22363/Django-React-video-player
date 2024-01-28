@@ -16,7 +16,6 @@ def home(request):
     dictionary = {}
     shows_list = Show.objects.all()
     shows = [element.name for element in shows_list]
-
     first_ep = Video.objects.filter(epNum=1)
     list = [element.id for element in first_ep]
 
@@ -43,12 +42,6 @@ def watch(request, episode_id):
     video_url = episode.file.url
     
     return render(request, 'watch.html', {
-        "video":video_url,
-        "list":list,
-        "ep_number":episode_list,
-
-        "ep":episode,
-        "sh":show_num,
-        "se":season_num,
+        "ep_list":episode_list,
         "id": id,
     })
