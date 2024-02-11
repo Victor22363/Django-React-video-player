@@ -20,6 +20,7 @@ class Video(models.Model):
     epNum = models.IntegerField()
     file = models.FileField(default=None, null=True, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
+    
 
     def save(self, *args, **kwargs):
         

@@ -4,8 +4,8 @@ from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    path('', home, name='watch'),
-    path('<int:episode_id>/', watch , name='watching')
+    #path('', home, name='watch'),
+    #path('<int:pk>/', watch , name='watching')
 ]
 
 if settings.DEBUG:

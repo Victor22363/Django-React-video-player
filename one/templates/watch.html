@@ -52,7 +52,7 @@
     
     <div id="Episode-Box">
         {%for element in ep_list%}
-        <div onclick="window.location.href='{% url 'watching' element.id %}'"><button id="Ep-Button" >Episode {{element.epNum}} </button></div>
+        <div onclick="window.location.href='{% url 'watching' element.id %}'"><button id="Ep-Button" >ep-{{element.epNum}} {{element.title}}</button></div>
         {% endfor %}
     </div>
 </div>

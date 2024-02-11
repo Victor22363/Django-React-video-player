@@ -1,17 +1,9 @@
+'''
 from django.shortcuts import render
 from django.http import HttpResponse
 import os, subprocess
 from .models import *
 # Create your views here.
-
-
-def hlsConfig(id, path):
-    subprocess.call(f"mkdir static/{id}")
-    subprocess.call(f"ffmpeg -i \"{path}\" -c:a aac -b:a 128k -c:v libx264 -crf 18 -flags -global_header -map 0 -f segment -segment_time 10 -segment_list \"{path}\{id}\playlist.m3u8\" -segment_format mpegts -c:s:0 copy \"{path}\{id}\segment_%05d.ts\"")
-
-    
-
-
 def home(request):
     dictionary = {}
     shows_list = Show.objects.all()
@@ -45,3 +37,5 @@ def watch(request, episode_id):
         "ep_list":episode_list,
         "id": id,
     })
+
+'''
